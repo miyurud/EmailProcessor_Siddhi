@@ -5,7 +5,7 @@ import org.apache.commons.net.ntp.TimeInfo;
 import org.joda.time.Instant;
 
 import org.wso2.carbon.event.processor.common.storm.benchmarks.emailprocessor.performance.PerfStats;
-import org.wso2.siddhi.core.ExecutionPlanRuntime;
+import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.stream.input.InputHandler;
@@ -128,7 +128,7 @@ public class EmailProcessorSiddhi {
 
         String query7 = "@info(name = 'query7') from emailMetricsNonFilteredStream select iij_timestamp, metrics output last every 10 sec insert into emailMetricsStream;";
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inputEmailStream+query1+query2+query3+query4+query5+query6+query7);
+        SiddhiAppRuntime executionPlanRuntime = siddhiManager.createSiddhiAppRuntime(inputEmailStream+query1+query2+query3+query4+query5+query6+query7);
 
         InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputEmailsStream");
         DataLoderThreadSiddhi dataLoderThreadSiddhi = new DataLoderThreadSiddhi(inputfilePath, inputHandler, differenceFromNTP);

@@ -1,9 +1,10 @@
 package org.wso2.carbon.event.processor.common.storm.benchmarks.emailprocessor.extensions;
 
 import com.google.common.base.Splitter;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
 
 import java.io.BufferedWriter;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by miyurud on 4/17/15.
@@ -33,8 +35,8 @@ public class GlobalMetricsFunction extends FunctionExecutor {
     private long startTime = 0;
     private boolean firstFlag = true;
 
-    @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors, SiddhiAppContext executionPlanContext) {
         java.util.Date date= new java.util.Date();
         String tt = (new Timestamp(date.getTime())).toString().replace(' ', '-');
         metricsLogFile = new File(LOG_FILE_PATH + "-" + tt + ".txt");
@@ -51,6 +53,10 @@ public class GlobalMetricsFunction extends FunctionExecutor {
         }
 
         prevTimeStamp = System.currentTimeMillis();
+    }
+
+    protected void init(ExpressionExecutor[] expressionExecutors, ConfigReader configReader, SiddhiAppContext siddhiAppContext) {
+
     }
 
     @Override
@@ -113,8 +119,12 @@ public class GlobalMetricsFunction extends FunctionExecutor {
         return Attribute.Type.STRING;
     }
 
-    public Object[] currentState() {
-        return new Object[0];
+    public Map<String, Object> currentState() {
+        return null;
+    }
+
+    public void restoreState(Map<String, Object> map) {
+
     }
 
     public void restoreState(Object[] state) {

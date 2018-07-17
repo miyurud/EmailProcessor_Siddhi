@@ -1,12 +1,14 @@
 package org.wso2.carbon.event.processor.common.storm.benchmarks.emailprocessor.extensions;
 
 import com.google.common.base.Splitter;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
 
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by miyurud on 4/17/15.
@@ -17,8 +19,12 @@ public class MetricsFunction  extends FunctionExecutor {
     private long windowStartTime;
     private String COMMA = ",";
 
-    @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors, SiddhiAppContext executionPlanContext) {
+
+    }
+
+    protected void init(ExpressionExecutor[] expressionExecutors, ConfigReader configReader, SiddhiAppContext siddhiAppContext) {
 
     }
 
@@ -83,8 +89,12 @@ public class MetricsFunction  extends FunctionExecutor {
         return Attribute.Type.STRING;
     }
 
-    public Object[] currentState() {
-        return new Object[0];
+    public Map<String, Object> currentState() {
+        return null;
+    }
+
+    public void restoreState(Map<String, Object> map) {
+
     }
 
     public void restoreState(Object[] state) {

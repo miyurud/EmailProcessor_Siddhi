@@ -1,12 +1,14 @@
 package org.wso2.carbon.event.processor.common.storm.benchmarks.emailprocessor.extensions;
 
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
 
 import javax.mail.internet.MimeUtility;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 /**
  * Created by miyurud on 4/17/15.
@@ -15,8 +17,12 @@ public class ModifyFunction extends FunctionExecutor {
     private String[] keyPeopleArray = new String[]{"Kenneth Lay","Jeffrey Skilling","Andrew Fastow"};
     private String[] replacementNamesArray = new String[]{"Person1","Person2","Person3"};
 
-    @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors, SiddhiAppContext executionPlanContext) {
+
+    }
+
+    protected void init(ExpressionExecutor[] expressionExecutors, ConfigReader configReader, SiddhiAppContext siddhiAppContext) {
 
     }
 
@@ -72,8 +78,12 @@ public class ModifyFunction extends FunctionExecutor {
         return Attribute.Type.STRING;
     }
 
-    public Object[] currentState() {
-        return new Object[0];
+    public Map<String, Object> currentState() {
+        return null;
+    }
+
+    public void restoreState(Map<String, Object> map) {
+
     }
 
     public void restoreState(Object[] state) {
