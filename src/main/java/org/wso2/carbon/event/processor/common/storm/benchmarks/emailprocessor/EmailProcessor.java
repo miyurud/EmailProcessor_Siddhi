@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class EmailProcessor {
     private static LinkedBlockingQueue<Object> eventBufferList = null;
-    private static String inputfilePath = "/home/miyurud/Projects/CEPStormPerf/EmailProcessorBenchmark/datasets/Enron/Avro/enron.avro";
+    private static String inputfilePath = "/home/sarangan/Downloads/enron.avro";
     public static void main(String[] args){
         eventBufferList = new LinkedBlockingQueue<Object>(Constants.EVENT_BUFFER_SIZE);
 

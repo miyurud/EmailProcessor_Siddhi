@@ -47,6 +47,20 @@ public class DataLoderThread extends Thread {
 				email = dataFileReader.next();
 
 				this.eventBufferList.put(email);
+
+				try{
+					
+					KafkaMessageSender.runProducer(email.toString());
+
+				}
+
+				catch (NullPointerException e) {
+					e.printStackTrace();
+				}
+				 catch (Exception e) {
+					e.printStackTrace();
+				}
+
 			}
 		}catch(IOException e){
 			e.printStackTrace();
