@@ -49,8 +49,7 @@ public class DataLoderThread extends Thread {
 				this.eventBufferList.put(email);
 
 				try{
-					//String jsonInString = mapper.writeValueAsString(email);
-					//System.out.println("string converted");
+					
 					KafkaMessageSender.runProducer(email.toString());
 
 				}
